@@ -64,10 +64,12 @@ const usersPost = async(req, res = response) => {
 const usersDelete = async(req, res = response) => {
     
     const { id } = req.params;
+    
 
     //Fisicamente borrado
     const usuario = await User.findByIdAndUpdate( id, { state:false } );
-    
+    // const usuarioAutenticado = req.user;
+
     res.json(usuario);
 }
 
