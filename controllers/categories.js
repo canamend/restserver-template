@@ -29,11 +29,10 @@ const getCategory = async( req, res = response ) => {
 }
 
 const updateCategory = async(req = request, res = response ) =>{
-    const { name } = req.body;
+    let { name } = req.body;
     const { id } = req.params;
-
+    name = name.toUpperCase();
     const categoryDB = await Category.findOne({ name });
-
     if( categoryDB ){
         return res.status(400).json({
             msg: `La categoria ${ categoryDB.name } ya existe`
@@ -61,8 +60,6 @@ const createCategory = async(req, res = response ) => {
     }
 
     const category = new Category(data);
-
-    console.log(category);
     await category.save();
 
     res.status(201).json(category)
