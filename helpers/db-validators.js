@@ -46,7 +46,17 @@ const productExistById = async( id = '' ) => {
     }
 }
 
+const allowedColections = async( colection = '', allowedColections = [] ) => {
+    const isIncluded = allowedColections.includes( colection );
+    if( !isIncluded ){
+        throw new Error(`La colección ${colection} no está permitida, por favor ingrese una de las siguientes: ${allowedColections}`)
+    }
+
+    return true;
+}
+
 module.exports = {
+    allowedColections,
     categoryExistById,
     emailExists,
     isRoleValid,
